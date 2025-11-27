@@ -13,6 +13,7 @@ A Python application that fetches real-time weather data from OpenWeatherMap API
 ## Project Structure
 
 WEATHER
+|___pycache___
 ├── config.py
 ├── data_logger.py
 ├── main.py
