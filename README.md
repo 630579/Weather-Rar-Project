@@ -121,3 +121,31 @@ Data saved successfully
 ```
  **Final output** :
 ```sql
+Main Menu:
+
+1. Check weather
+2. View history
+3. Exit
+Enter your choice (1-3): 2
+
+=== Recent Weather Searches ===
+
+Ponnuru: 22.21°C, 83.0% humidity, 2.4 m/s wind
+Condition: overcast clouds
+Time: 2025-11-27 22:48:11
+
+london: 13.08°C, 90.0% humidity, 5.66 m/s wind
+Condition: overcast clouds
+Time: 2025-11-27 22:47:48
+
+Vinukonda: 20.21°C, 86.0% humidity, 1.2 m/s wind
+Condition: broken clouds
+Time: 2025-11-27 22:37:55
+
+Tenali: 22.72°C, 75.0% humidity, 2.86 m/s wind
+Condition: broken clouds
+Time: 2025-11-27 22:22:06
+
+Guntur: 20.88°C, 80.0% humidity, 2.23 m/s wind
+Condition: broken clouds
+Time: 2025-11-27 22:21:45
