@@ -34,6 +34,22 @@ WEATHER
 
 Complete API response data
 
+## Database Schema
+
+The application uses SQLite with the following table structure:
+
+```sql
+CREATE TABLE logs (
+    id INTEGER PRIMARY KEY,
+    city TEXT,
+    temp REAL,
+    humidity INTEGER,
+    condition TEXT,
+    wind speed REAL,
+    timestamp TEXT
+)
+```
+
 ## User Experience
 - **Interactive CLI**: Easy-to-use command-line interface
 
@@ -70,21 +86,7 @@ Complete API response data
    - Sign up for a free account
    - Generate an API key in your dashboard
 
-## Database Schema
 
-The application uses SQLite with the following table structure:
-
-```sql
-CREATE TABLE logs (
-    id INTEGER PRIMARY KEY,
-    city TEXT,
-    temp REAL,
-    humidity INTEGER,
-    condition TEXT,
-    wind speed REAL,
-    timestamp TEXT
-)
-```
 
  **Data basa** :
 Example of output
