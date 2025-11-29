@@ -1,6 +1,35 @@
 ## Real-Time Weather Information & Data Logger
 A Python application that fetches real-time weather data from OpenWeatherMap API, displays weather information for user-specified cities, and logs all responses with timestamps to both SQLite database and text files.
 
+## Project Structure
+
+WEATHER
+├── config.py
+├── data_logger.py
+├── main.py
+├── weather_api.py
+└── weather.db
+
+
+## Requirements
+
+- Python 3.6+
+- `requests` library
+
+## Installation
+
+1. Clone or download the project files
+2. Install required dependencies:
+   ```bash
+   pip install requests
+   ```
+
+3. Get an API key from [OpenWeatherMap](https://openweathermap.org/api)
+   - Sign up for a free account
+   - Generate an API key in your dashboard
+  
+
+   
 # Features
 - **Real-time Weather Data**: Fetches current weather information using OpenWeatherMap API
 
@@ -10,14 +39,7 @@ A Python application that fetches real-time weather data from OpenWeatherMap API
 
 - **Object-Oriented Design**: Clean, modular code using OOP principles
 
-## Project Structure
 
-WEATHER
-├── config.py
-├── data_logger.py
-├── main.py
-├── weather_api.py
-└── weather.db
 
 ## Data Storage & Logging
 
@@ -32,6 +54,8 @@ WEATHER
 - City name searched
 
 Complete API response data
+
+
 
 ## Database Schema
 
@@ -57,6 +81,9 @@ CREATE TABLE logs (
 - **Continuous Operation**: Run multiple queries without restarting
 
 - **Clear Display**: Formatted, readable weather information
+
+
+
 ## Error Handling
 - Invalid city names
 
@@ -68,22 +95,6 @@ CREATE TABLE logs (
 
 - Invalid user inputs
 
-## Requirements
-
-- Python 3.6+
-- `requests` library
-
-## Installation
-
-1. Clone or download the project files
-2. Install required dependencies:
-   ```bash
-   pip install requests
-   ```
-
-3. Get an API key from [OpenWeatherMap](https://openweathermap.org/api)
-   - Sign up for a free account
-   - Generate an API key in your dashboard
 
 
 
