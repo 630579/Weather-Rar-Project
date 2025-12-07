@@ -1,0 +1,235 @@
+"""
+Database handler for weather data storage
+"""
+import sqlite3
+from typing import Dict, List, Optional, Tuple
+from datetime import datetime
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import DATABASE_NAME, DATE_FORMAT
+
+
+class DatabaseHandler:
+    """Handles all database operations for weather data"""
+    
+    def __init__(self, db_name: str = DATABASE_NAME):
+        """
+        Initialize DatabaseHandler
+        
+        Args:
+            db_name (str): SQLite database filename
+        """
+        self.db_name = db_name
+        self._ensure_data_directory()
+        self._initialize_database()
+    
+    def _ensure_data_directory(self):
+        """Create data directory if it doesn't exist"""
+        data_dir = os.path.dirname(self.db_name)
+        if data_dir and not os.path.exists(data_dir):
+            os.makedirs(data_dir)
+    
+    def _initialize_database(self):
+        """Create database tables if they don't exist"""
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            # Create weather_logs table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS weather_logs (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    city TEXT NOT NULL,
+                    country TEXT,
+                    temperature REAL,
+                    humidity INTEGER,
+                    pressure INTEGER,
+                    weather_main TEXT,
+                    weather_description TEXT,
+                    wind_speed REAL,
+                    log_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            
+            conn.commit()
+            conn.close()
+            
+        except sqlite3.Error as e:
+            print(f"Database Initialization Error: {str(e)}")
+    
+    def _get_connection(self) -> sqlite3.Connection:
+        """Get database connection"""
+        return sqlite3.connect(self.db_name)
+    
+    def log_weather_data(self, weather_info: Dict) -> bool:
+        """
+        Log weather data to database
+        
+        Args:
+            weather_info (Dict): Weather information to log
+            
+        Returns:
+            bool: True if successful, False otherwise
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute('''
+                INSERT INTO weather_logs 
+                (city, country, temperature,humidity, pressure, 
+                 weather_main, weather_description, wind_speed,)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                weather_info.get('city', 'Unknown'),
+                weather_info.get('country', 'Unknown'),
+                weather_info.get('temperature'),
+                weather_info.get('humidity'),
+                weather_info.get('pressure'),
+                weather_info.get('weather_main', 'Unknown'),
+                weather_info.get('weather_description', 'Unknown'),
+                weather_info.get('wind_speed'),
+            ))
+            
+            conn.commit()
+            conn.close()
+            return True
+            
+        except sqlite3.Error as e:
+            print(f"Database Logging Error: {str(e)}")
+            return False
+    
+    def get_all_logs(self) -> List[Tuple]:
+        """
+        Get all weather logs from database
+        
+        Returns:
+            List[Tuple]: List of weather log records
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute('''
+                SELECT 
+                    city, country, temperature, humidity, 
+                    weather_description, log_timestamp
+                FROM weather_logs 
+                ORDER BY log_timestamp DESC
+            ''')
+            
+            logs = cursor.fetchall()
+            conn.close()
+            
+            return logs
+            
+        except sqlite3.Error as e:
+            print(f"Database Query Error: {str(e)}")
+            return []
+    
+    def get_recent_logs(self, limit: int = 10) -> List[Tuple]:
+        """
+        Get recent weather logs
+        
+        Args:
+            limit (int): Number of logs to retrieve
+            
+        Returns:
+            List[Tuple]: List of recent weather logs
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute('''
+                SELECT 
+                    city, country, temperature, humidity, 
+                    weather_description, log_timestamp
+                FROM weather_logs 
+                ORDER BY log_timestamp DESC 
+                LIMIT ?
+            ''', (limit,))
+            
+            logs = cursor.fetchall()
+            conn.close()
+            
+            return logs
+            
+        except sqlite3.Error as e:
+            print(f"Database Query Error: {str(e)}")
+            return []
+    
+    def search_logs_by_city(self, city_name: str) -> List[Tuple]:
+        """
+        Search logs by city name
+        
+        Args:
+            city_name (str): City name to search for
+            
+        Returns:
+            List[Tuple]: List of matching logs
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute('''
+                SELECT 
+                    city, country, temperature, humidity, 
+                    weather_description, log_timestamp
+                FROM weather_logs 
+                WHERE LOWER(city) LIKE LOWER(?)
+                ORDER BY log_timestamp DESC
+            ''', (f'%{city_name}%',))
+            
+            logs = cursor.fetchall()
+            conn.close()
+            
+            return logs
+            
+        except sqlite3.Error as e:
+            print(f"Database Search Error: {str(e)}")
+            return []
+    
+    def clear_all_logs(self) -> bool:
+        """
+        Clear all weather logs from database
+        
+        Returns:
+            bool: True if successful, False otherwise
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute('DELETE FROM weather_logs')
+            
+            conn.commit()
+            conn.close()
+            return True
+            
+        except sqlite3.Error as e:
+            print(f"Database Clear Error: {str(e)}")
+            return False
+    
+    def get_record_count(self) -> int:
+        """
+        Get total number of records in database
+        
+        Returns:
+            int: Number of records
+        """
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor()
+            
+            cursor.execute('SELECT COUNT(*) FROM weather_logs')
+            
+            count = cursor.fetchone()[0]
+            conn.close()
+            
+            return count
+            
+        except sqlite3.Error:
+            return 0

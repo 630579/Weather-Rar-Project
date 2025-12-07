@@ -1,0 +1,9 @@
+[2025-12-06 19:31:09] City: Thenali, Country: IN, Temperature: 24.4C, Humidity: 79%, Pressure: 1016 hPa, Wind Speed: 2.85 m/s, Condition: overcast clouds
+[2025-12-06 19:31:46] City: London, Country: GB, Temperature: 12.1C, Humidity: 81%, Pressure: 997 hPa, Wind Speed: 6.17 m/s, Condition: broken clouds
+[2025-12-07 21:56:07] City: Guntur, Country: IN, Temperature: 20.9C, Humidity: 84%, Pressure: 1017 hPa, Wind Speed: 1.59 m/s, Condition: broken clouds
+[2025-12-07 21:56:14] City: Ponnur, Country: IN, Temperature: 22.8C, Humidity: 84%, Pressure: 1017 hPa, Wind Speed: 1.66 m/s, Condition: overcast clouds
+[2025-12-07 21:59:09] City: London, Country: GB, Temperature: 14.3C, Humidity: 90%, Pressure: 997 hPa, Wind Speed: 6.69 m/s, Condition: overcast clouds
+[2025-12-07 21:59:14] City: Guntur, Country: IN, Temperature: 20.9C, Humidity: 84%, Pressure: 1017 hPa, Wind Speed: 1.59 m/s, Condition: broken clouds
+[2025-12-07 21:59:57] City: Guntur, Country: IN, Temperature: 20.9C, Humidity: 84%, Pressure: 1017 hPa, Wind Speed: 1.59 m/s, Condition: broken clouds
+[2025-12-07 22:00:05] City: Ponnur, Country: IN, Temperature: 22.8C, Humidity: 84%, Pressure: 1017 hPa, Wind Speed: 1.66 m/s, Condition: overcast clouds
+[2025-12-07 22:00:12] City: Thenali, Country: IN, Temperature: 22.7C, Humidity: 85%, Pressure: 1016 hPa, Wind Speed: 1.82 m/s, Condition: overcast clouds
