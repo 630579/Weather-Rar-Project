@@ -7,7 +7,7 @@ from typing import Dict, Optional, List, Tuple
 class WeatherApplication:
     
     def __init__(self):
-        # Default API key
+        
         self.default_api_key = "aa00015428549d15927ba90d925622dc"
         self.api_key = None
         self.db_name = "weather_data.db"
@@ -78,14 +78,14 @@ class WeatherApplication:
         print("Get one for free at: https://openweathermap.org/api")
         print("-" * 50)
         
-        # Try environment variable first
+        
         api_key = os.environ.get('OPENWEATHER_API_KEY')
         if api_key:
             self.api_key = api_key
             print("\nUsing API key from environment variable.")
             return
         
-        # Use default API key
+       
         print(f"\nUsing default API key: {self.default_api_key[:8]}...")
         self.api_key = self.default_api_key
         os.environ['OPENWEATHER_API_KEY'] = self.default_api_key
@@ -240,16 +240,14 @@ class WeatherApplication:
             raw_data = self.fetch_weather_data(city)
             if not raw_data:
                 continue
-            
-            # Process data
+
             weather_info = self.process_weather_data(raw_data)
             if not weather_info:
                 continue
             
-            # Display data
             self.display_weather_report(weather_info)
             
-            # Log data
+            
             db_success = self.log_to_database(weather_info)
             file_success = self.log_to_file(weather_info)
             
@@ -313,7 +311,7 @@ class WeatherApplication:
         for i, log in enumerate(logs, 1):
             city, country, temp, humidity, condition, timestamp = log
             
-            # Truncate long condition descriptions
+           
             condition_display = condition[:18] + '...' if len(condition) > 18 else condition
             
             print(f"{i:<4} {city:<20} {country:<10} {temp:<10.1f} {humidity:<12} {condition_display:<20} {timestamp}")
@@ -332,7 +330,7 @@ class WeatherApplication:
         print("RECENT WEATHER LOGS (LAST 10)")
         print("-" * 40)
         
-        logs = self.get_all_logs()[:10]  # Get first 10
+        logs = self.get_all_logs()[:10] 
         
         if not logs:
             print("\nNo logs found in database.")
@@ -345,7 +343,7 @@ class WeatherApplication:
         for i, log in enumerate(logs, 1):
             city, country, temp, humidity, condition, timestamp = log
             
-            # Truncate long condition descriptions
+            
             condition_display = condition[:18] + '...' if len(condition) > 18 else condition
             
             print(f"{i:<4} {city:<20} {country:<10} {temp:<10.1f} {humidity:<12} {condition_display:<20} {timestamp}")
@@ -494,11 +492,11 @@ class WeatherApplication:
         print("STORAGE INFORMATION")
         print("-" * 50)
         
-        # Database info
+        
         logs = self.get_all_logs()
         print(f"\nDatabase Records: {len(logs)}")
         
-        # File info
+        
         try:
             if os.path.exists(self.log_file):
                 file_size = os.path.getsize(self.log_file)
@@ -559,7 +557,7 @@ class WeatherApplication:
         self.api_key = new_key
         os.environ['OPENWEATHER_API_KEY'] = new_key
         
-        # Test the new key
+       
         print("\nTesting new API key...")
         test_result = self.fetch_weather_data("London")
         
@@ -617,10 +615,10 @@ class WeatherApplication:
         input("\nPress Enter to continue...")
     
     def run(self):
-        # Get API key first
+      
         self.get_api_key()
         
-        # Test the API key
+      
         os.system('cls' if os.name == 'nt' else 'clear')
         self.display_header()
         
@@ -675,7 +673,7 @@ class WeatherApplication:
 
 def main():
     try:
-        try:                        # request application check
+        try:                       
             import requests
         except ImportError:
             print("ERROR: 'requests' library is not installed.")
@@ -692,4 +690,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
