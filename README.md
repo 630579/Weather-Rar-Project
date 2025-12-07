@@ -5,10 +5,13 @@ A Python application that fetches real-time weather data from OpenWeatherMap API
 
 WEATHER
 ├── config.py
-├── data_logger.py
+├── file_logger.py
 ├── main.py
+├── menu_system.py
+├── validators.py
 ├── weather_api.py
-└── weather.db
+├──weather_log.txt
+└── weather_data.db
 
 
 ## Requirements
@@ -99,66 +102,77 @@ CREATE TABLE logs (
 
 
  **Data basa** :
-Example of output
-```sql
-Main Menu:
-
-1. Check weather
-2. View history
-3. Exit
-Enter your choice (1-3): 1
-Enter city name: Guntur
-Getting weather data for Guntur...
-=== Weather in Guntur ===
-Temperature: 20.88 °C
-Humidity: 80%
-I
-Wind Speed: 2.23 m/s
-Conditions: broken clouds
-Data saved successfully!
-
-Main Menu:
-
-1. Check weather
-2. View history
-3. Exit
-Enter your choice (1-3): 1
-Enter city name: Tenali
-Getting weather data for Tenali...
-Weather in Thenali
-Temperature: 22.72 °C
-Humidity: 75%
-Wind Speed: 2.86 m/s
-Conditions: broken clouds
-Data saved successfully
+ output
 ```
- **Final output** :
-```sql
-Main Menu:
+REAL-TIME WEATHER DATA LOGGER
 
-1. Check weather
-2. View history
-3. Exit
-Enter your choice (1-3): 2
+MAIN OPERATIONS MENU
 
-=== Recent Weather Searches ===
+A. CHECK CURRENT WEATHER
+B. VIEW ALL WEATHER LOGS
+C. VIEW RECENT LOGS (LAST 10)
+D. SEARCH LOGS BY CITY NAME
+E. MANAGE DATA STORAGE
+F. SYSTEM SETTINGS
+Enter city name (or 'BACK' to return): guntur
 
-Ponnuru: 22.21°C, 83.0% humidity, 2.4 m/s wind
-Condition: overcast clouds
-Time: 2025-11-27 22:48:11
+Fetching weather data for guntur...
+---------------------------------------------------
+CURRENT WEATHER REPORT
+---------------------------------------------------
+City:         Guntur
+Temperature:  20.9 C
+Humidity:     84 %
+Pressure:     1017 hPa
+Wind Speed:   1.59 m/s
+Condition:    Broken Clouds
+Report Time:  2025-12-07 21:59:57
+---------------------------------------------------
 
-london: 13.08°C, 90.0% humidity, 5.66 m/s wind
-Condition: overcast clouds
-Time: 2025-11-27 22:47:48
+SUCCESS: Data logged to both database and file.
+Options:
+1. Check another city
+2. Return to main menu
+Select option (1 or 2): 1
 
-Vinukonda: 20.21°C, 86.0% humidity, 1.2 m/s wind
-Condition: broken clouds
-Time: 2025-11-27 22:37:55
+Enter city name (or 'BACK' to return): ponnur
 
-Tenali: 22.72°C, 75.0% humidity, 2.86 m/s wind
-Condition: broken clouds
-Time: 2025-11-27 22:22:06
+Fetching weather data for ponnur...
 
-Guntur: 20.88°C, 80.0% humidity, 2.23 m/s wind
-Condition: broken clouds
-Time: 2025-11-27 22:21:45
+---------------------------------------------------
+CURRENT WEATHER REPORT
+---------------------------------------------------
+City:         Ponnur, IN
+Temperature:  22.8 C
+Humidity:     84 %
+Pressure:     1017 hPa
+Wind Speed:   1.66 m/s
+Condition:    Overcast Clouds
+Report Time:  2025-12-07 22:00:05
+
+ REAL-TIME WEATHER DATA LOGGER
+---------------------------------------------------
+
+ALL WEATHER LOGS
+---------------------------------------------------
+
+No.  City                 Country    Temp(C)    Humidity(%)  Condition            Time
+---------------------------------------------------
+1    Tenali              IN         22.7       85           overcast clouds      2025-12-07 16:30:12
+2    Ponnur               IN         22.8       84           overcast clouds      2025-12-07 16:30:05
+3    London               GB         14.3       90           overcast clouds      2025-12-07 16:29:09
+4    Guntur               IN         20.9       84           broken clouds        2025-12-07 16:26:07
+Total records in database: 4
+
+---------------------------------------------------
+MAIN OPERATIONS MENU
+---------------------------------------------------
+A. CHECK CURRENT WEATHER
+B. VIEW ALL WEATHER LOGS
+C. VIEW RECENT LOGS (LAST 10)
+D. SEARCH LOGS BY CITY NAME
+E. MANAGE DATA STORAGE
+F. SYSTEM SETTINGS
+X. EXIT APPLICATION
+
+Select option (A-X): X
